@@ -6,29 +6,10 @@
 #include <Arduino.h>
 #include <ESP32Servo.h>
 
-//Pinos dos servos motores
-static const int servoBaseGir = 33;
-static const int servosBracoA = 32;
-static const int servoBracoB = 23;
-static const int servoBracoC = 19;
-static const int servoConectorGarra = 18;
-static const int servoGarra = 5;
+// Os arquivos headers estão na pasta INCLUDE
+#include <constantes.h>
+#include <funcoes.h>
 
-//Potenciômetros de cada servo motor e de controle
-static const int pot_servoBaseGir = 26;
-static const int pot_servosBracoA = 27;
-static const int pot_servoBracoB = 14;
-static const int pot_servoBracoC = 2;
-static const int pot_servoConectorGarra = 4;
-static const int pot_servoGarra = 15;
-static const int pot_controle = 25;
-
-//Botões
-static const int bot1 = 34;
-static const int bot2 = 35;
-
-//Leds
-static const int leds = 13;
 
 //Criação dos servos 
 Servo baseGir, bracoA, bracoB, bracoC, conectorGarra, garra;
@@ -45,11 +26,38 @@ void setup() {
 
   pinMode(bot1, INPUT);
   pinMode(bot2, INPUT);
-  pinMode(leds, OUTPUT);
+
+  ledcSetup(canalLed, freqPWMLed, resoluc);
+  ledcAttachPin(leds, canalLed);
+
 }
 
 void loop() {
+  //Posições dos servos a partir da leitura dos potenciômetros
+  int pos_BasGir = map(analogRead(pot_servoBaseGir), 0, 4096, 0, 180);
+  int pos_BracoA = map(analogRead(pot_servosBracoA), 0, 4096, 0, 180);
+  int pos_BracoB = map(analogRead(pot_servoBracoB), 0, 4096, 0, 180);
+  int pos_BracoC = map(analogRead(pot_servoBracoC), 0, 4096, 0, 180);
+  int pos_ConectorGarra = map(analogRead(pot_servoConectorGarra), 0, 4096, 0, 180);
+  int pos_Garra = map(analogRead(pot_servoGarra), 0, 4096, 0, 180);
+
+  //Posição do potenciômetro de controle do sistema (display)
+  int pos_Controle = map(analogRead(pot_controle), 0, 4096, 0, 180);
   
+
+  //Atuação dos servos
+  baseGir.write(pos_BasGir);
+  delay(20);
+  bracoA.write(pos_BracoA);
+  delay(20);
+  bracoB.write(pos_BracoB);
+  delay(20);
+  bracoC.write(pos_BracoC);
+  delay(20);
+  conectorGarra.write(pos_ConectorGarra);
+  delay(20);
+  garra.write(pos_Garra);
+  delay(20);
 
 
 }

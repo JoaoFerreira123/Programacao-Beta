@@ -18,3 +18,5 @@ void ledsPadrao(){
   }
 
 }
+
+//criar as outras funções para os modos dos leds -> Piscando rápido qdo salva posição e etc.

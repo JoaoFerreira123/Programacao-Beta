@@ -59,5 +59,8 @@ void loop() {
   garra.write(pos_Garra);
   delay(20);
 
+  //Deixa os leds no modo padrão
+  ledsPadrao();
+
 
 }

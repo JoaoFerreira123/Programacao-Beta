@@ -1,7 +1,9 @@
+#include <Arduino.h>
 #include <constantes.h>
 
 
-int ledsPadrao(leds){
+
+void ledsPadrao(){
   
   int intensidade = 10;
 
@@ -15,5 +17,4 @@ int ledsPadrao(leds){
     delay(20);
   }
 
-  return 0;
 }

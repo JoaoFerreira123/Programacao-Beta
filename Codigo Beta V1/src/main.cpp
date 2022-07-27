@@ -46,6 +46,7 @@ void loop() {
   
 
   //Atuação dos servos
+  //Futuramente, para a movimentação, ver como faz para ela ser mais suave!
   baseGir.write(pos_BasGir);
   delay(20);
   bracoA.write(pos_BracoA);

@@ -1,5 +1,5 @@
 //Versão de teste do código braço robótico BETA
-//Código para ser aplicado no teste em protoboard 
+//Código para ser aplicado no teste em protoboard - Com menos motores
 //17/07/2022
 
 #include <Arduino.h>

@@ -56,7 +56,7 @@ void setup() {
 
 void loop() {
 
-  if (Serial.available() > 0){
+  while (Serial.available() > 0){
     //só vai ler se tiver /, ou seja, só quando tiver um numero -> não lê o tempo todo
     String leitura = Serial.readStringUntil('/');
     Serial.flush();

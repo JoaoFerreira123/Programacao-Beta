@@ -20,9 +20,6 @@ static const int servoBracoC = 23;
 static const int servoConectorGarra = 33;
 static const int servoGarra = 32;
 
-#define canalLED 10
-#define freq 5000
-#define resoluc 8
 
 
 //Criação dos servos 
@@ -39,15 +36,9 @@ void setup() {
   garra.attach(servoGarra);
 
 
-  //Leds
-  ledcSetup(canalLED, freq, resoluc);
-  ledcAttachPin(4, canalLED); //pin4
-
-
 }
 
 void loop() {
-  
 
   while (Serial.available() > 0){
     //só vai ler se tiver /, ou seja, só quando tiver um numero -> não lê o tempo todo
@@ -103,16 +94,7 @@ void loop() {
 
  }
 
-  //Comportamento dos LEDS
-  for(int i=0; i<255; i+=5){
-    ledcWrite(canalLED, i);
-    delay(20);
-  }
-  
-  for(int j=255; j>0; j-=5){
-    ledcWrite(canalLED, j);
-    delay(20);
-  }
+
 
 
 }

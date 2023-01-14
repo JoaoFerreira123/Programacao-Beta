@@ -52,4 +52,11 @@ bracoC.grid(row=3, column=0)
 conectorGarra.grid(row=4, column=0)
 garra.grid(row=5, column=0)
 
+baseGir.set(90)
+bracoA.set(90)
+bracoB.set(90)
+bracoC.set(90)
+conectorGarra.set(90)
+
+
 w.mainloop()

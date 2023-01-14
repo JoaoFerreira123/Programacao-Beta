@@ -13,12 +13,12 @@
 
 //DEU BUG COM AS CTES SEPARADAS
 //Pinos dos servos motores
-static const int servoBaseGir = 5;
-static const int servosBracoA = 18;
-static const int servoBracoB = 21;
-static const int servoBracoC = 23;
-static const int servoConectorGarra = 33;
-static const int servoGarra = 32;
+static const int servoBaseGir = 18;
+static const int servosBracoA = 22;
+static const int servoBracoB = 23;
+static const int servoBracoC = 21;
+static const int servoConectorGarra = 5;
+static const int servoGarra = 15;
 
 #define canalLED 10
 #define freq 5000
@@ -41,7 +41,7 @@ void setup() {
 
   //Leds
   ledcSetup(canalLED, freq, resoluc);
-  ledcAttachPin(4, canalLED); //pin4
+  ledcAttachPin(32, canalLED); //pin4
 
 
 }

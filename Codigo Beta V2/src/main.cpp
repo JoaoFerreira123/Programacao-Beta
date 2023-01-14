@@ -102,8 +102,8 @@ void loop() {
    }
 
  }
-
-  //Comportamento dos LEDS
+  //Modo "pulsante" dos LEDS foi retirado pois os DELAYS estavam causando atraso na movimentação do robô
+  /*//Comportamento dos LEDS
   for(int i=0; i<255; i+=5){
     ledcWrite(canalLED, i);
     delay(20);
@@ -113,6 +113,6 @@ void loop() {
     ledcWrite(canalLED, j);
     delay(20);
   }
-
+  */
 
 }

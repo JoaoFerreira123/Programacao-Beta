@@ -1,13 +1,6 @@
 from tkinter import *
 import serial
 
-#Bibliotecas para IK
-import ikpy.chain
-import ikpy.utils.plot as plot_utils
-import numpy as np
-import time
-import math
-import ipywidgets as widgets
 
 w = Tk()
 w.minsize(400, 200)

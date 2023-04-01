@@ -1,6 +1,6 @@
 // Código V4 do Braço Robótico Beta
-// Código para CONTROLE USANDO CINEMÁTICA INVERSA
-// Início: 26/02/2023
+// Código para CONTROLE via WIFI, tanto upload de Código quanto Web server para controle
+// Início: 01/04/2023
 // Final: XX/XX/2023
 
 #include <Arduino.h>

@@ -6,6 +6,11 @@
 #include <Arduino.h>
 #include <ESP32Servo.h>
 
+//upload Over the Air
+#include <upload.h>
+//O IP é 192.168.100.30
+//Dai é só colocar esse ip/update -> 192.168.100.30/update e vai abrir o site para upload
+
 //Pinos dos servos motores
 static const int servoBaseGir = 18;
 static const int servosBracoA = 22;
@@ -43,6 +48,10 @@ int reset = 0;
 
 //int posicoes[10][6]; //matriz para guardar 10 posições
 void setup() {
+
+  upload_OTA("Oi_A822","MchCM3TM");
+  pinMode(2, OUTPUT);
+
   Serial.begin(115200);
   baseGir.attach(servoBaseGir);
   bracoA.attach(servosBracoA);
@@ -51,11 +60,16 @@ void setup() {
   conectorGarra.attach(servoConectorGarra);
   garra.attach(servoGarra);
 
+  
+
 
 }
 
 void loop() {
-  
+  digitalWrite(2, 1);
+  delay(250);
+  digitalWrite(2, 0);
+  delay(250);
 
   while (Serial.available() > 0){
     //só vai ler se tiver /, ou seja, só quando tiver um numero -> não lê o tempo todo

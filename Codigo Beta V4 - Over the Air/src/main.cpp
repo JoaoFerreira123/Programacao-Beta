@@ -3,13 +3,19 @@
 // Início: 01/04/2023
 // Final: XX/XX/2023
 
+
 #include <Arduino.h>
 #include <ESP32Servo.h>
+#include <WiFi.h>
+#include <AsyncTCP.h>
+#include <ESPAsyncWebServer.h>
+#include "SPIFFS.h"
+#include <Arduino_JSON.h>
+#include <AsyncElegantOTA.h>
 
-//upload Over the Air
-#include <upload.h>
-//O IP é 192.168.100.30
-//Dai é só colocar esse ip/update -> 192.168.100.30/update e vai abrir o site para upload
+//Funções para WebControl
+#include<WebControl.h>
+
 
 //Pinos dos servos motores
 static const int servoBaseGir = 18;
@@ -45,11 +51,30 @@ int posG[10];
 int nPos = 0;
 int reset = 0;
 
+const int freq = 5000;
+const int ledChannel1 = 0;
+const int resolution = 8;
+
 
 //int posicoes[10][6]; //matriz para guardar 10 posições
 void setup() {
 
-  upload_OTA("Oi_A822","MchCM3TM");
+  initFS();
+  initWiFi();
+  initWebSocket();
+
+
+// Web Server Root URL
+  server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
+    request->send(SPIFFS, "/index.html", "text/html");
+  });
+  
+  server.serveStatic("/", SPIFFS, "/");
+  AsyncElegantOTA.begin(&server);    // Start ElegantOTA
+  // Start server
+  server.begin();
+
+
   pinMode(2, OUTPUT);
 
   Serial.begin(115200);
@@ -60,16 +85,15 @@ void setup() {
   conectorGarra.attach(servoConectorGarra);
   garra.attach(servoGarra);
 
-  
-
+  pinMode(27, OUTPUT);
+  ledcSetup(ledChannel1, freq, resolution);
+  ledcAttachPin(27, ledChannel1);
 
 }
 
 void loop() {
-  digitalWrite(2, 1);
-  delay(250);
-  digitalWrite(2, 0);
-  delay(250);
+
+  ledcWrite(ledChannel1, dutyCycle1);
 
   while (Serial.available() > 0){
     //só vai ler se tiver /, ou seja, só quando tiver um numero -> não lê o tempo todo
@@ -337,6 +361,7 @@ void loop() {
       }
     }
    }
+   ws.cleanupClients();
 }
   
 

@@ -67,7 +67,7 @@ void initWiFi() {
     digitalWrite(2, 0);
     delay(250);
 
-    Serial.print('.');
+    //Serial.print('.');
     delay(1000);
   }
   Serial.println(WiFi.localIP());

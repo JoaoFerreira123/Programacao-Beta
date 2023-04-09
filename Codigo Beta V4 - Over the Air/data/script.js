@@ -48,4 +48,5 @@ function onMessage(event) {
         document.getElementById(key).innerHTML = myObj[key];
         document.getElementById("slider"+ (i+1).toString()).value = myObj[key];
     }
+    document.getElementById("log").className = event.data;
 }

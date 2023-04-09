@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Web Console</title>
+</head>
+<body>
+  <script>
+    const socket = new WebSocket(`ws://${window.location.hostname}/ws`);
+    socket.onmessage = function(event) {
+      const data = JSON.parse(event.data);
+      dataReceived(data);
+    }
+    function dataReceived(data) {
+      console.log(data);
+    }
+  </script>
+</body>
+</html>

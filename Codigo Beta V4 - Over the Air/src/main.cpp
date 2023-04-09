@@ -55,20 +55,24 @@ const int freq = 5000;
 const int ledChannel1 = 0;
 const int resolution = 8;
 
-
-//int posicoes[10][6]; //matriz para guardar 10 posições
 void setup() {
 
   initFS();
   initWiFi();
   initWebSocket();
 
-
 // Web Server Root URL
   server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
     request->send(SPIFFS, "/index.html", "text/html");
   });
   
+//Route to the WebConsole
+server.on("/console", HTTP_GET, [](AsyncWebServerRequest *request){
+  request->send(SPIFFS, "/console.html", "text/html");
+});
+
+
+
   server.serveStatic("/", SPIFFS, "/");
   AsyncElegantOTA.begin(&server);    // Start ElegantOTA
   // Start server
@@ -92,8 +96,10 @@ void setup() {
 }
 
 void loop() {
+  
 
   ledcWrite(ledChannel1, dutyCycle1);
+
 
   while (Serial.available() > 0){
     //só vai ler se tiver /, ou seja, só quando tiver um numero -> não lê o tempo todo

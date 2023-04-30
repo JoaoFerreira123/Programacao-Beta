@@ -33,7 +33,7 @@ uint8_t pos_BasGir, pos_BracoA, pos_BracoB, pos_BracoC, pos_ConectorGarra, pos_G
 
 
 //Variaveis com as posicoes ANTERIORES dos servos - já definindo a POS inicial de cada servo
-uint8_t Ppos_BasGir = 90;
+uint8_t Ppos_BasGir = 0;
 uint8_t Ppos_BracoA = 90;
 uint8_t Ppos_BracoB = 90;
 uint8_t Ppos_BracoC = 90;
@@ -98,26 +98,19 @@ server.on("/console", HTTP_GET, [](AsyncWebServerRequest *request){
 void loop() {
   
 
-  ledcWrite(ledChannel1, dutyCycle1);
-
-
-  while (Serial.available() > 0){
-    //só vai ler se tiver /, ou seja, só quando tiver um numero -> não lê o tempo todo
-    String leitura = Serial.readStringUntil('/');
-    Serial.flush();
-    
+  ledcWrite(ledChannel1, dutyCycle3);
     
     // a variavel pos (leitura serial) vai ter um codigo identificando o motor e a posição do motor
     //ex: a45 -> motor A na posição 45º
 
 
-
-   char motor = leitura[0];
+  char motor = 'R';
+   //char motor = leitura[0];
 
    switch (motor){
     case 'R':{ //Base giratória
-      leitura.remove(0,1); //a partir do indice 0, remove 1 caractere
-      pos_BasGir = leitura.toInt();
+      //leitura.remove(0,1); //a partir do indice 0, remove 1 caractere
+      pos_BasGir = sliderValue1.toInt();
 
       if(Ppos_BasGir > pos_BasGir){
         for(int i=Ppos_BasGir; i>= pos_BasGir; i--){
@@ -136,8 +129,8 @@ void loop() {
       break;
     }
     case 'A':{ //Braço A
-      leitura.remove(0,1);
-      pos_BracoA = leitura.toInt();
+      //leitura.remove(0,1);
+      //pos_BracoA = leitura.toInt();
       if(Ppos_BracoA > pos_BracoA){
         for(int i=Ppos_BracoA; i>= pos_BracoA; i--){
           bracoA.write(i);
@@ -155,8 +148,8 @@ void loop() {
       break;
     }
     case 'B':{ //Braço B
-      leitura.remove(0,1);
-      pos_BracoB = leitura.toInt();
+      //leitura.remove(0,1);
+      //pos_BracoB = leitura.toInt();
       if(Ppos_BracoB > pos_BracoB){
         for(int i=Ppos_BracoB; i>= pos_BracoB; i--){
           bracoB.write(i);
@@ -174,8 +167,8 @@ void loop() {
       break;
     }
     case 'C':{ //Braço C
-      leitura.remove(0,1);
-      pos_BracoC = leitura.toInt();
+      //leitura.remove(0,1);
+      //pos_BracoC = leitura.toInt();
       if(Ppos_BracoC > pos_BracoC){
         for(int i=Ppos_BracoC; i>= pos_BracoC; i--){
           bracoC.write(i);
@@ -192,8 +185,8 @@ void loop() {
       break;
     }
     case 'T':{ //Conector Garra
-      leitura.remove(0,1);
-      pos_ConectorGarra = leitura.toInt();
+      //leitura.remove(0,1);
+      //pos_ConectorGarra = leitura.toInt();
       if(Ppos_ConectorGarra > pos_ConectorGarra){
         for(int i=Ppos_ConectorGarra; i>= pos_ConectorGarra; i--){
           conectorGarra.write(i);
@@ -210,8 +203,8 @@ void loop() {
       break;
     }
     case 'G':{ //Garra
-      leitura.remove(0,1);
-      pos_Garra = leitura.toInt();
+      //leitura.remove(0,1);
+      //pos_Garra = leitura.toInt();
        if(Ppos_Garra > pos_Garra){
         for(int i=Ppos_Garra; i>= pos_Garra; i--){
           garra.write(i);
@@ -366,8 +359,9 @@ void loop() {
         
       }
     }
-   }
-   ws.cleanupClients();
+    ws.cleanupClients();
 }
+   
+
   
 

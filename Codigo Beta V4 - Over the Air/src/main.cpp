@@ -79,7 +79,7 @@ server.on("/console", HTTP_GET, [](AsyncWebServerRequest *request){
   server.begin();
 
 
-  pinMode(2, OUTPUT);
+  
 
   Serial.begin(115200);
   baseGir.attach(servoBaseGir);
@@ -89,9 +89,9 @@ server.on("/console", HTTP_GET, [](AsyncWebServerRequest *request){
   conectorGarra.attach(servoConectorGarra);
   garra.attach(servoGarra);
 
-  pinMode(27, OUTPUT);
+  pinMode(5, OUTPUT);
   ledcSetup(ledChannel1, freq, resolution);
-  ledcAttachPin(27, ledChannel1);
+  ledcAttachPin(5, ledChannel1);
 
 }
 
